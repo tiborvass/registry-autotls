@@ -20,5 +20,5 @@ echo docker run -d \
 	-e REGISTRY_PORT="$REGISTRY_PORT" \
 	-e GUNICORN_OPTS="['--certfile','/ssl/registry.cert','--keyfile','/ssl/registry.key','--ca-certs','/ssl/ca.crt','--ssl-version',3]" \
 	--volumes-from "$generator_cid" \
-	-p 127.0.0.1:$REGISTRY_PORT:$REGISTRY_PORT \
-	$@ registry
+	-p "127.0.0.1:$REGISTRY_PORT:$REGISTRY_PORT" \
+	"$@" registry
