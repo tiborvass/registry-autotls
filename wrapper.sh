@@ -12,7 +12,7 @@ mkdir -p "$certsd" && cp /ssl/ca.crt "$certsd/"
 
 generate_cert --host "$REGISTRY_COMMON_NAME" --ca "/ssl/ca.crt" --ca-key "/ssl/ca.key" --cert "/ssl/registry.cert" --key "/ssl/registry.key" >/dev/null
 
-generator_cid="$(grep ':/docker/' /proc/1/cgroup | head -1 | cut -d/ -f3)"
+generator_cid="$(grep ':/docker/' /proc/1/cgroup | head -1 | sed -r 's#.*/docker/([^/]+)$#\1#')"
 
 echo docker run -d \
 	-e REGISTRY_PORT="$REGISTRY_PORT" \
